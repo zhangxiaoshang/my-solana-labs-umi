@@ -5,7 +5,14 @@ export default defineConfig({
     type: 'none',
   },
   routes: [
-    { path: '/', component: '@/pages/index' },
+    {
+      path: '/',
+      component: '@/components/layouts/BasicLayout',
+      routes: [
+        { path: '/home', component: '@/pages/index' },
+        { path: '/airdrop', component: '@/pages/airdrop' },
+      ],
+    },
   ],
   fastRefresh: {},
 });
