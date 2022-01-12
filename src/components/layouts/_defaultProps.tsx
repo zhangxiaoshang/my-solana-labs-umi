@@ -10,17 +10,21 @@ export default {
   route: {
     path: '/',
     routes: [
-      {
-        path: '/welcome',
-        name: 'Welcome',
-        icon: <SmileOutlined />,
-        component: './Welcome',
-      },
+      // {
+      //   path: '/welcome',
+      //   name: 'Welcome',
+      //   component: './Welcome',
+      // },
+
       {
         path: '/airdrop',
         name: 'Airdrop',
-        icon: <SmileOutlined />,
         component: '@/pages/airdrop',
+      },
+      {
+        path: '/pyth',
+        name: 'Pyth',
+        component: '@/pages/pyth',
       },
 
       // {

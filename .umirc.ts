@@ -9,8 +9,9 @@ export default defineConfig({
       path: '/',
       component: '@/components/layouts/BasicLayout',
       routes: [
-        { path: '/home', component: '@/pages/index' },
+        { path: '/', redirect: '/airdrop' },
         { path: '/airdrop', component: '@/pages/airdrop' },
+        { path: '/pyth', component: '@/pages/pyth' },
       ],
     },
   ],
