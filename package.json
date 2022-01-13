@@ -27,6 +27,7 @@
     "@solana/wallet-adapter-react-ui": "^0.9.2",
     "@solana/wallet-adapter-wallets": "^0.14.1",
     "@solana/web3.js": "^1.31.0",
+    "js-base64": "^3.7.2",
     "react": "17.x",
     "react-dom": "17.x",
     "umi": "^3.5.20"

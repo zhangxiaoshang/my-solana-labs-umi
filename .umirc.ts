@@ -12,6 +12,7 @@ export default defineConfig({
         { path: '/', redirect: '/airdrop' },
         { path: '/airdrop', component: '@/pages/airdrop' },
         { path: '/pyth', component: '@/pages/pyth' },
+        { path: '/nft-descriptor', component: '@/pages/NFTDescriptor' },
       ],
     },
   ],

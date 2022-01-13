@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  SmileOutlined,
-  CrownOutlined,
-  TabletOutlined,
-  AntDesignOutlined,
-} from '@ant-design/icons';
+import { SmileOutlined, CrownOutlined, TabletOutlined, AntDesignOutlined } from '@ant-design/icons';
 
 export default {
   route: {
@@ -25,6 +20,11 @@ export default {
         path: '/pyth',
         name: 'Pyth',
         component: '@/pages/pyth',
+      },
+      {
+        path: '/nft-descriptor',
+        name: 'NFTDescriptor',
+        component: '@/pages/NFTDescriptor',
       },
 
       // {
