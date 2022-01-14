@@ -55,7 +55,7 @@ export default () => {
   state.hashrates_days.forEach((value, index) => {
     if (!value) return;
     const millisecond_per_day = 24 * 60 * 60 * 1000;
-    const text = moment.utc(state.start_time + index * millisecond_per_day).format('MM-DD');
+    const text = moment(state.start_time + index * millisecond_per_day).format('MM-DD');
 
     dayData.push({
       text,
@@ -90,7 +90,7 @@ export default () => {
         </Col>
         <Col span={12}>
           <Card>
-            <Statistic title="start_time" value={moment.utc(state.start_time).format('YYYY-MM-DD HH:mm:ss')} />
+            <Statistic title="start_time" value={moment.utc(state.start_time).format('YYYY-MM-DD HH:mm:ss') + ' (UTC)'} />
           </Card>
         </Col>
         <Col span={24}>
