@@ -26,6 +26,11 @@ export default {
         name: 'NFTDescriptor',
         component: '@/pages/NFTDescriptor',
       },
+      {
+        path: '/hash-rate-state',
+        name: 'HashRateState',
+        component: '@/pages/hashRateState',
+      },
 
       // {
       //   path: 'https://ant.design',

@@ -4,13 +4,7 @@ import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 import defaultProps from './_defaultProps';
 import WalletAdapterProvider from '@/components/WalletAdapterProvider';
 
-export default ({
-  children,
-  content,
-}: {
-  children: React.ReactNode;
-  content: React.ReactNode;
-}) => {
+export default ({ children, content }: { children: React.ReactNode; content: React.ReactNode }) => {
   const history = useHistory();
   const { pathname } = useLocation();
 
@@ -70,6 +64,7 @@ export default ({
           <div
             style={{
               height: 'calc(100vh - 168px)',
+              overflow: 'auto',
             }}
           >
             <WalletAdapterProvider>{children}</WalletAdapterProvider>
