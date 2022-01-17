@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { PublicKey } from '@solana/web3.js';
 import { useConnection } from '@solana/wallet-adapter-react';
 import { HashRateState, HASH_RATE_STATE_SCHEMA } from './model';
 import { deserializeUnchecked } from 'borsh';
 import { Row, Col, Card, Statistic } from 'antd';
 import moment from 'moment';
 import { Area } from '@ant-design/plots';
-
-const HASH_RATE_STATE_PROGRAM_ID = new PublicKey('3ZYMjGLgMQTU5m1Xh4Deg6gzimE5bJw4JJ3muvHvGaeY');
+import Transaction from './Transaction';
+import { HASH_RATE_STATE_PROGRAM_ID } from './ids';
 
 export default () => {
   const { connection } = useConnection();
@@ -46,34 +45,76 @@ export default () => {
       title: {
         text: 'TH/s',
       },
+
+      // grid: {
+      //   line: {
+      //     style: {},
+      //   },
+      // },
     },
+
+    guideLine: [
+      {
+        type: 'mean',
+        lineStyle: {
+          stroke: 'red',
+          lineDash: [4, 2],
+        },
+        text: {
+          position: 'end',
+          content: '平均值',
+          style: {
+            fill: 'red',
+          },
+        },
+      },
+    ],
   };
 
   const dayData: { text: string; value: number }[] = [];
   const hourData: { text: string; value: number }[] = [];
 
-  state.hashrates_days.forEach((value, index) => {
-    if (!value) return;
+  // get last 1 year data
+  (() => {
+    if (!state?.hashrates_days.length) return;
+    let start_moment = moment.utc(state.start_time);
+    const end_moment = moment.utc();
+
     const millisecond_per_day = 24 * 60 * 60 * 1000;
-    const text = moment(state.start_time + index * millisecond_per_day).format('MM-DD');
 
-    dayData.push({
-      text,
-      value,
-    });
-  });
+    let i = 0;
+    do {
+      const text = moment.utc(start_moment).format('MM-DD');
+      dayData.push({
+        text,
+        value: state?.hashrates_days[i],
+      });
 
-  state.hashrates_hours.forEach((value, index) => {
-    if (!value) return;
+      start_moment.add(millisecond_per_day, 'milliseconds');
+      i++;
+    } while (start_moment.isBefore(end_moment));
+  })();
 
+  // get last 24h data
+  (() => {
+    if (!state?.hashrates_hours.length) return;
+    const start_moment = moment.utc(state.start_time);
+    let last_24h_start = moment.utc().hour(start_moment.hour()).minute(start_moment.minute()).second(start_moment.second());
+    console.log('last_24h_start:', last_24h_start.format('YYYY-MM-DD HH:mm:ss'));
+    const last_24h_end = moment.utc();
+    console.log('last_24h_end: ', last_24h_end.format('YYYY-MM-DD HH:mm:ss'));
     const millisecond_per_hour = 60 * 60 * 1000;
-    const text = moment(state.start_time + index * millisecond_per_hour).format('HH:mm');
-
-    hourData.push({
-      text,
-      value,
-    });
-  });
+    let i = 0;
+    do {
+      const text = moment.utc(last_24h_start).format('HH:mm');
+      hourData.push({
+        text,
+        value: state?.hashrates_hours[i],
+      });
+      last_24h_start.add(millisecond_per_hour, 'milliseconds');
+      i++;
+    } while (last_24h_start.isBefore(last_24h_end));
+  })();
 
   return (
     <div>
@@ -108,6 +149,12 @@ export default () => {
         <Col span={24}>
           <Card title="Hashrate of last 1 year">
             <Area {...config} data={dayData} />
+          </Card>
+        </Col>
+
+        <Col span={24}>
+          <Card title="Transaction">
+            <Transaction />
           </Card>
         </Col>
       </Row>
