@@ -7,14 +7,30 @@ import moment from 'moment';
 import { Area } from '@ant-design/plots';
 import Transaction from './Transaction';
 import { HASH_RATE_STATE_PROGRAM_ID } from './ids';
+import numbro from 'numbro';
 
 export default () => {
   const { connection } = useConnection();
   const [state, setState] = useState<HashRateState>();
+  const [poolStatus, setPoolStatus] = useState<any>();
+
+  const initPoolStatus = () => {
+    fetch('https://pool.api.btc.com/v1/pool/status/?puid=728545')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('poolStatus: ', data);
+        setPoolStatus(data.data);
+      })
+      .catch(console.error);
+  };
 
   useEffect(() => {
     initHashRateState();
   }, [connection]);
+
+  useEffect(() => {
+    initPoolStatus();
+  }, []);
 
   const initHashRateState = async () => {
     const context = await connection.getAccountInfo(HASH_RATE_STATE_PROGRAM_ID);
@@ -99,7 +115,11 @@ export default () => {
   (() => {
     if (!state?.hashrates_hours.length) return;
     const start_moment = moment.utc(state.start_time);
-    let last_24h_start = moment.utc().hour(start_moment.hour()).minute(start_moment.minute()).second(start_moment.second());
+    let last_24h_start = moment
+      .utc()
+      .hour(start_moment.hour())
+      .minute(start_moment.minute())
+      .second(start_moment.second());
     console.log('last_24h_start:', last_24h_start.format('YYYY-MM-DD HH:mm:ss'));
     const last_24h_end = moment.utc();
     console.log('last_24h_end: ', last_24h_end.format('YYYY-MM-DD HH:mm:ss'));
@@ -131,9 +151,46 @@ export default () => {
         </Col>
         <Col span={12}>
           <Card>
-            <Statistic title="start_time" value={moment.utc(state.start_time).format('YYYY-MM-DD HH:mm:ss') + ' (UTC)'} />
+            <Statistic
+              title="start_time"
+              value={moment.utc(state.start_time).format('YYYY-MM-DD HH:mm:ss') + ' (UTC)'}
+            />
           </Card>
         </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic
+              title="Hashrate"
+              value={poolStatus?.network_hashrate}
+              suffix={poolStatus?.network_hashrate_unit + 'H/s'}
+              formatter={(value) => (
+                <a href="https://btc.com/" target="_blank" style={{ textDecoration: 'underline' }}>
+                  {value}
+                </a>
+              )}
+            />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic
+              title="Next Difficulty"
+              value={poolStatus?.estimated_next_difficulty / 1e12}
+              formatter={(value) => (
+                <a href="https://btc.com/" target="_blank" style={{ textDecoration: 'underline' }}>
+                  {numbro(value).format({ mantissa: 2 })}
+                </a>
+              )}
+              suffix={
+                <span>
+                  {poolStatus?.mining_earnings_unit}
+                  <span style={{ fontSize: '14px' }}>{poolStatus?.difficulty_change}</span>
+                </span>
+              }
+            />
+          </Card>
+        </Col>
+
         <Col span={24}>
           <Card>
             <Statistic title="publisher" value={state.publisher.toString()} />
