@@ -17,6 +17,11 @@ export default {
         component: '@/pages/airdrop',
       },
       {
+        path: '/account',
+        name: 'Account',
+        component: '@/pages/account',
+      },
+      {
         path: '/pyth',
         name: 'Pyth',
         component: '@/pages/pyth',
