@@ -105,7 +105,9 @@ export default () => {
 
         <Space direction="horizontal" wrap>
           {pages.map((page) => (
-            <div className={styles.displayImage}>{page.cgg.replace(/[,.，。；;]/g, ' ')}</div>
+            <div key={page.zl} className={styles.displayImage}>
+              {page.cgg.replace(/[,.，。；;]/g, ' ')}
+            </div>
           ))}
         </Space>
 
@@ -113,7 +115,7 @@ export default () => {
         <div className={styles.forDownload}>
           <Space direction="horizontal" wrap>
             {pages.map((page, index) => (
-              <div id={`page${index}`} className={styles.wrapImage}>
+              <div key={index} id={`page${index}`} className={styles.wrapImage}>
                 {page.cgg.replace(/[,.，。；;]/g, ' ')}
               </div>
             ))}
