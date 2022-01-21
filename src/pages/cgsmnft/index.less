@@ -1,0 +1,48 @@
+.main {
+  position: relative;
+  width: 100%;
+
+  @font-face {
+    font-family: sxtFont;
+    src: url('/sxt.ttf'); /* IE9+,可以是具体的实际链接 */
+  }
+}
+
+.forDownload {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  left: 1000vw;
+
+  .wrapImage {
+    font-family: sxtFont;
+    font-size: 96px;
+    font-weight: bold;
+
+    width: 672px;
+    height: 768px;
+    padding: 36px;
+    background-color: #fbf0dc;
+    color: #000;
+
+    // 多行竖排
+    writing-mode: vertical-rl; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
+    writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+  }
+}
+
+.displayImage {
+  font-family: sxtFont;
+  font-size: 48px;
+  font-weight: bold;
+
+  width: 336px;
+  height: 384px;
+  padding: 18px;
+  background-color: #fbf0dc;
+  color: #000;
+
+  // 多行竖排
+  writing-mode: vertical-rl; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
+  writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+}

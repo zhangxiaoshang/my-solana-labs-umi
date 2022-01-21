@@ -19,6 +19,7 @@ export default defineConfig({
         { path: '/pyth', component: '@/pages/pyth' },
         { path: '/nft-descriptor', component: '@/pages/NFTDescriptor' },
         { path: '/hash-rate-state', component: '@/pages/hashRateState' },
+        { path: '/cgsm-nft', component: '@/pages/cgsmnft' },
       ],
     },
   ],

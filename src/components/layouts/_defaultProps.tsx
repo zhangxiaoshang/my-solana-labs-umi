@@ -36,6 +36,11 @@ export default {
         name: 'HashRateState',
         component: '@/pages/hashRateState',
       },
+      {
+        path: '/cgsm-nft',
+        name: '称骨算命NFT',
+        component: '@/pages/cgsmnft',
+      },
 
       // {
       //   path: 'https://ant.design',
