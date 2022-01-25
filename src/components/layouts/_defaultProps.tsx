@@ -37,9 +37,19 @@ export default {
         component: '@/pages/hashRateState',
       },
       {
-        path: '/cgsm-nft',
-        name: '称骨算命NFT',
-        component: '@/pages/cgsmnft',
+        name: '称骨算命',
+        routes: [
+          {
+            path: '/cgsm-nft',
+            name: 'NFT',
+            component: '@/pages/cgsmnft',
+          },
+          {
+            path: '/cgsm',
+            name: '称骨算命',
+            component: '@/pages/cgsmnft/cgsm',
+          },
+        ],
       },
 
       // {

@@ -20,6 +20,7 @@ export default defineConfig({
         { path: '/nft-descriptor', component: '@/pages/NFTDescriptor' },
         { path: '/hash-rate-state', component: '@/pages/hashRateState' },
         { path: '/cgsm-nft', component: '@/pages/cgsmnft' },
+        { path: '/cgsm', component: '@/pages/cgsmnft/cgsm' },
       ],
     },
   ],

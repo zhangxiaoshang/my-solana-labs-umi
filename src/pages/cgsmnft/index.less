@@ -14,35 +14,55 @@
   overflow: hidden;
   left: 1000vw;
 
-  .wrapImage {
-    font-family: sxtFont;
-    font-size: 96px;
-    font-weight: bold;
+  .displayImage {
+    padding: 48px;
 
-    width: 672px;
-    height: 768px;
-    padding: 36px;
-    background-color: #fbf0dc;
-    color: #000;
+    .wrapCgg {
+      font-size: 96px;
+      width: 604px;
+      font-weight: bold;
 
-    // 多行竖排
-    writing-mode: vertical-rl; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
-    writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+      span {
+        height: 704px;
+      }
+    }
+    .gz {
+      font-size: 48px;
+    }
   }
 }
 
 .displayImage {
   font-family: sxtFont;
-  font-size: 48px;
-  font-weight: bold;
 
-  width: 336px;
-  height: 384px;
-  padding: 18px;
+  padding: 24px;
   background-color: #fbf0dc;
   color: #000;
 
   // 多行竖排
   writing-mode: vertical-rl; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
   writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
+
+  .wrapCgg {
+    font-size: 48px;
+    width: 302px;
+    font-weight: bold;
+
+    span {
+      display: block;
+      height: 352px;
+    }
+    span:nth-child(2n) {
+      margin-top: 1em;
+    }
+  }
+
+  .gz {
+    font-size: 24px;
+    display: block;
+    text-align: bottom;
+    height: 100%;
+    text-align: end;
+    padding-bottom: 3em;
+  }
 }
